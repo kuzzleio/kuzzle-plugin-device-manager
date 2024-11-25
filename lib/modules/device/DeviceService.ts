@@ -81,7 +81,7 @@ export class DeviceService extends DigitalTwinService {
       },
     );
   }
-  
+
   /**
    * Create a new device.
    *
