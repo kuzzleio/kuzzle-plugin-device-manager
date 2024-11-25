@@ -81,44 +81,6 @@ export class DeviceService extends DigitalTwinService {
       },
     );
 
-    /**
-     * On deletion of a tenant, remove association for all of
-     * its formerly linked devices in the admin index.
-     */
-    this.app.hook.register(
-      "multi-tenancy/tenant:afterDelete",
-      async (request) => {
-        const { group, name } = request.input.args;
-        const tenantIndex = `tenant-${group}-${name}`;
-        const devices = [];
-
-        let result = await this.sdk.document.search(
-          this.config.adminIndex,
-          "devices",
-          {
-            _source: false,
-            query: { bool: { must: { term: { engineId: tenantIndex } } } },
-          },
-          {
-            scroll: "2s",
-            size: 100,
-          },
-        );
-        while (result !== null) {
-          devices.push(...result.hits);
-          result = await result.next();
-        }
-        void this.sdk.document.mUpdate(
-          this.config.adminIndex,
-          "devices",
-          devices.map((device) => {
-            return { _id: device._id, body: { assetId: null, engineId: null } };
-          }),
-        );
-      },
-    );
-  }
-
   /**
    * Create a new device.
    *
