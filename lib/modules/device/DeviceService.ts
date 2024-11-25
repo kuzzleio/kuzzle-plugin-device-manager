@@ -80,7 +80,8 @@ export class DeviceService extends DigitalTwinService {
         await this.attachEngine(engineId, deviceId, request);
       },
     );
-
+  }
+  
   /**
    * Create a new device.
    *
