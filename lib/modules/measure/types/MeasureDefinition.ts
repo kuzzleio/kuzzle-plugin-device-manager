@@ -1,5 +1,6 @@
 import { SchemaObject } from "ajv";
 import { JSONObject } from "kuzzle-sdk";
+import { LocaleDetails } from "lib/modules/model";
 
 /* *
  * Represents a measure information and localization
@@ -63,6 +64,9 @@ export interface MeasureValuesDetails {
  */
 
 export interface MeasureDefinition {
+  locales?: {
+    [valueName: string]: LocaleDetails;
+  };
   /**
    * Mappings for the measurement values in order to index the fields
    */

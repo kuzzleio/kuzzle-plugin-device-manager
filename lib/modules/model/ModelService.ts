@@ -24,6 +24,7 @@ import { ModelSerializer } from "./ModelSerializer";
 import {
   AssetModelContent,
   DeviceModelContent,
+  LocaleDetails,
   MeasureModelContent,
   MetadataDetails,
   MetadataGroups,
@@ -369,9 +370,13 @@ export class ModelService extends BaseService {
     valuesMappings: JSONObject,
     validationSchema?: SchemaObject,
     valuesDetails?: MeasureValuesDetails,
+    locales?: {
+      [valueName: string]: LocaleDetails;
+    },
   ): Promise<KDocument<MeasureModelContent>> {
     const modelContent: MeasureModelContent = {
       measure: {
+        locales,
         type,
         valuesDetails,
         valuesMappings,
