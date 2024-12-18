@@ -6,8 +6,6 @@ interface DecodersControllerRequest {
 
 export interface ApiDecoderListRequest extends DecodersControllerRequest {
   action: "list";
-
-  _id: string;
 }
 export type ApiDecoderListResult = {
   decoders: DecoderContent[];

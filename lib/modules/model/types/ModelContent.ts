@@ -35,7 +35,8 @@ export interface LocaleDetails {
 
 export interface BaseEditorHint {
   readOnly?: boolean;
-  type: EditorHintEnum;
+  isModal?: boolean;
+  type: EditorHintEnum | string;
 }
 
 export enum EditorHintEnum {

@@ -64,9 +64,7 @@ export class DevicesController {
         },
         upsert: {
           handler: this.upsert.bind(this),
-          http: [
-            { path: "device-manager/:engineId/devices/:_id", verb: "post" },
-          ],
+          http: [{ path: "device-manager/:engineId/devices", verb: "put" }],
         },
         replaceMetadata: {
           handler: this.replaceMetadata.bind(this),

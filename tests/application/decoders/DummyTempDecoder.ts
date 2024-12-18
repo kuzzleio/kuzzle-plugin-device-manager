@@ -7,7 +7,7 @@ import {
   TemperatureMeasurement,
   BatteryMeasurement,
 } from "../../../index";
-import { AccelerationMeasurement } from "../measures/AccelerationMeasure";
+import { AccelerationMeasurement } from "../measures/Acceleration";
 import { isMeasureDated } from "../../helpers/payloads";
 
 export class DummyTempDecoder extends Decoder {

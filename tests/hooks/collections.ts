@@ -1,4 +1,5 @@
 import { Kuzzle } from "kuzzle-sdk";
+import { deleteModels } from "./models";
 
 export async function truncateCollection(
   sdk: Kuzzle,
@@ -7,35 +8,7 @@ export async function truncateCollection(
 ) {
   await sdk.collection.refresh(index, collection);
   await sdk.document.deleteByQuery(index, collection, {});
-}
-
-async function deleteModels(sdk: Kuzzle) {
-  await sdk.collection.refresh("device-manager", "models");
-  await sdk.document.deleteByQuery(
-    "device-manager",
-    "models",
-    {
-      query: {
-        ids: {
-          values: [
-            "model-measure-presence",
-            "model-asset-Plane",
-            "model-asset-AdvancedPlane",
-            "model-asset-Car",
-            "model-device-Zigbee",
-            "model-device-Bluetooth",
-            "model-device-Enginko",
-            "model-asset-TestHouse",
-            "model-asset-AdvancedWarehouse",
-            "model-measure-falseMagic",
-          ],
-        },
-      },
-    },
-    {
-      refresh: "wait_for",
-    },
-  );
+  await sdk.collection.refresh(index, collection);
 }
 
 export async function beforeEachTruncateCollections(sdk: Kuzzle) {

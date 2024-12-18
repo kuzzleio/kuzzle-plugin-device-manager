@@ -60,6 +60,7 @@ export function registerTestPipes(app: Backend) {
                 metadata: asset._source.metadata,
                 model: asset._source.model,
                 reference: asset._source.reference,
+                softTenant: asset._source.softTenant,
               },
               measuredAt: measure.measuredAt,
               origin: {
@@ -111,6 +112,7 @@ export function registerTestPipes(app: Backend) {
             metadata: asset._source.metadata,
             model: asset._source.model,
             reference: asset._source.reference,
+            softTenant: asset._source.softTenant,
           },
           origin: {
             type: "computed",

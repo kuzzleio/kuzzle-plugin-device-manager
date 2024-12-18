@@ -49,8 +49,6 @@ export type ApiDeviceMetadataReplaceResult = KDocument<DeviceContent>;
 export interface ApiDeviceUpsertRequest extends DevicesControllerRequest {
   action: "upsert";
 
-  _id: string;
-
   refresh?: string;
 
   body: {

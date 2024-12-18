@@ -3,8 +3,10 @@ import {
   AssetContent,
   TemperatureMeasurement,
   PositionMeasurement,
-  AssetModelDefinition,
+  AssetModel,
 } from "../../../index";
+
+const modelName = "Container";
 
 export interface ContainerMetadata extends Metadata {
   height: number;
@@ -26,115 +28,118 @@ export type ContainerMeasurements = {
 };
 
 export interface ContainerAssetContent extends AssetContent<ContainerMeasurements, ContainerMetadata> {
-  model: "Container";
+  model: typeof modelName;
 }
 
-export const containerAssetDefinition: AssetModelDefinition = {
-  measures: [
-    { name: "temperatureExt", type: "temperature" },
-    { name: "temperatureInt", type: "temperature" },
-    { name: "position", type: "position" },
-    { name: "temperatureWeather", type: "temperature" },
-  ],
-  metadataMappings: {
-    weight: { type: "integer" },
-    height: { type: "integer" },
-    trailer: {
-      properties: {
-        weight: { type: "integer" },
-        capacity: { type: "integer" },
-      },
-    },
-    person: {
-      properties: {
-        company: { type: "keyword" },
-      },
-    },
-  },
-  defaultMetadata: {
-    height: 20,
-  },
-  metadataDetails: {
-    extTemp: {
-      group: "environment",
-      locales: {
-        en: {
-          friendlyName: "External Temperature",
-          description: "The temperature outside the container",
+export const Container: AssetModel = {
+  modelName,
+  definition: {
+    measures: [
+      { name: "temperatureExt", type: "temperature" },
+      { name: "temperatureInt", type: "temperature" },
+      { name: "position", type: "position" },
+      { name: "temperatureWeather", type: "temperature" },
+    ],
+    metadataMappings: {
+      weight: { type: "integer" },
+      height: { type: "integer" },
+      trailer: {
+        properties: {
+          weight: { type: "integer" },
+          capacity: { type: "integer" },
         },
-        fr: {
-          friendlyName: "Température Externe",
-          description: "La température à l'extérieur du conteneur",
+      },
+      person: {
+        properties: {
+          company: { type: "keyword" },
         },
       },
     },
-    intTemp: {
-      group: "environment",
-      locales: {
-        en: {
-          friendlyName: "Internal Temperature",
-          description: "The temperature inside the container",
+    defaultMetadata: {
+      height: 20,
+    },
+    metadataDetails: {
+      extTemp: {
+        group: "environment",
+        locales: {
+          en: {
+            friendlyName: "External Temperature",
+            description: "The temperature outside the container",
+          },
+          fr: {
+            friendlyName: "Température Externe",
+            description: "La température à l'extérieur du conteneur",
+          },
         },
-        fr: {
-          friendlyName: "Température Interne",
-          description: "La température à l'intérieur du conteneur",
+      },
+      intTemp: {
+        group: "environment",
+        locales: {
+          en: {
+            friendlyName: "Internal Temperature",
+            description: "The temperature inside the container",
+          },
+          fr: {
+            friendlyName: "Température Interne",
+            description: "La température à l'intérieur du conteneur",
+          },
         },
       },
     },
-  },
-  metadataGroups: {
-    environment: {
-      locales: {
-        en: {
-          groupFriendlyName: "Environmental Measurements",
-          description: "All environmental relative measurments",
-        },
-        fr: {
-          groupFriendlyName: "Mesures environnementales",
-          description: "Toutes les mesures liées a l'environement",
+    metadataGroups: {
+      environment: {
+        locales: {
+          en: {
+            groupFriendlyName: "Environmental Measurements",
+            description: "All environmental relative measurments",
+          },
+          fr: {
+            groupFriendlyName: "Mesures environnementales",
+            description: "Toutes les mesures liées a l'environement",
+          },
         },
       },
     },
-  },
-  tooltipModels: {
-    defaultTooltipKey: {
-      tooltipLabel: "Default Tooltip Model",
-      content: [
-        {
-          category: "measure",
-          label: {
-            locales: {
-              en: {
-                friendlyName: "External Temperature",
-                description: "",
-              },
-              fr: {
-                friendlyName: "Température Externe",
-                description: "",
+    tooltipModels: {
+      defaultTooltipKey: {
+        tooltipLabel: "Default Tooltip Model",
+        content: [
+          {
+            category: "measure",
+            label: {
+              locales: {
+                en: {
+                  friendlyName: "External Temperature",
+                  description: "",
+                },
+                fr: {
+                  friendlyName: "Température Externe",
+                  description: "",
+                },
               },
             },
+            measureSlot: "temperatureExt",
+            measureValuePath: "temperatureExt",
           },
-          measureSlot: "temperatureExt",
-          measureValuePath: "temperatureExt",
-        },
-        {
-          category: "measure",
-          label: {
-            locales: {
-              en: {
-                friendlyName: "Internal Temperature",
-                description: "",
-              },
-              fr: {
-                friendlyName: "Température Interne",
-                description: "",
+          {
+            category: "measure",
+            label: {
+              locales: {
+                en: {
+                  friendlyName: "Internal Temperature",
+                  description: "",
+                },
+                fr: {
+                  friendlyName: "Température Interne",
+                  description: "",
+                },
               },
             },
+            measureSlot: "temperatureInt",
+            measureValuePath: "temperatureInt",
           },
-          measureSlot: "temperatureInt",
-          measureValuePath: "temperatureInt",
-        },
-      ],
+        ],
+      },
     },
   },
 };
@@ -182,7 +187,8 @@ function neverCalled() {
     reference: "",
     metadata: undefined,
     measures,
-    lastMeasuredAt: 0
+    lastMeasuredAt: 0,
+    softTenant: [],
   };
 
   container.metadata.height = 40;

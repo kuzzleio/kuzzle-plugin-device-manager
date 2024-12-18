@@ -21,8 +21,8 @@ describe("Assets mapping", () => {
       "assets",
     );
 
-    expect(mapping.properties?.softTenant).toBeDefined();
-    expect(mapping.properties.softTenant).toMatchObject({
+    expect(mapping.properties?.custom).toBeDefined();
+    expect(mapping.properties.custom).toMatchObject({
       type: "keyword",
       fields: { text: { type: "text" } },
     });
@@ -34,8 +34,8 @@ describe("Assets mapping", () => {
       "devices",
     );
 
-    expect(mapping.properties?.softTenant).toBeDefined();
-    expect(mapping.properties.softTenant).toMatchObject({
+    expect(mapping.properties?.custom).toBeDefined();
+    expect(mapping.properties.custom).toMatchObject({
       type: "keyword",
       fields: { text: { type: "text" } },
     });

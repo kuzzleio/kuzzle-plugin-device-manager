@@ -15,8 +15,8 @@ The Upsert operation allows you to create a new device or update an existing one
 ### HTTP
 
 ```http
-URL: http://kuzzle:7512/_/device-manager/:engineId/devices/:_id
-Method: POST
+URL: http://kuzzle:7512/_/device-manager/:engineId/devices
+Method: PUT
 ```
 
 ## Other protocols

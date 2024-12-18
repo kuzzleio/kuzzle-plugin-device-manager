@@ -32,6 +32,7 @@ export class AssetSerializer {
       metadata: asset._source.metadata,
       model: asset._source.model,
       reference: asset._source.reference,
+      softTenant: asset._source.softTenant,
     };
   }
 }

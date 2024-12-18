@@ -1,3 +1,39 @@
+# [2.5.0](https://github.com/kuzzleio/kuzzle-device-manager/compare/v2.4.4...v2.5.0) (2024-12-05)
+
+
+### Bug Fixes
+
+* **assetservice:** can't replace metadata if not present in asset ([#384](https://github.com/kuzzleio/kuzzle-device-manager/issues/384)) ([eb65c0a](https://github.com/kuzzleio/kuzzle-device-manager/commit/eb65c0a1ae65488033a5422ce0879e8820fe05fa))
+* backport fix ([#380](https://github.com/kuzzleio/kuzzle-device-manager/issues/380)) ([5392b56](https://github.com/kuzzleio/kuzzle-device-manager/commit/5392b56a9478b1c1932845ee44965d5978197350))
+
+
+### Features
+
+* add editor hint support ([#386](https://github.com/kuzzleio/kuzzle-device-manager/issues/386)) ([a9b62df](https://github.com/kuzzleio/kuzzle-device-manager/commit/a9b62df423f1218c7bd7866e33b33626f4f17e06))
+* **measure:** allow measures to be pushed on Assets via API (no devices) ([#344](https://github.com/kuzzleio/kuzzle-device-manager/issues/344)) ([c1073c1](https://github.com/kuzzleio/kuzzle-device-manager/commit/c1073c1f0ccb4cfc7cee64d86c51a4999617fd41))
+* **softTenants:** add softTenant ids to assets measures documents ([#383](https://github.com/kuzzleio/kuzzle-device-manager/issues/383)) ([1b36fe0](https://github.com/kuzzleio/kuzzle-device-manager/commit/1b36fe019ce11a0fb7faf4ce5f3c6c2cff4223e9))
+
+# [2.5.0-dev.5](https://github.com/kuzzleio/kuzzle-device-manager/compare/v2.5.0-dev.4...v2.5.0-dev.5) (2024-12-05)
+
+
+### Bug Fixes
+
+* **assetservice:** can't replace metadata if not present in asset ([#384](https://github.com/kuzzleio/kuzzle-device-manager/issues/384)) ([eb65c0a](https://github.com/kuzzleio/kuzzle-device-manager/commit/eb65c0a1ae65488033a5422ce0879e8820fe05fa))
+
+# [2.5.0-dev.4](https://github.com/kuzzleio/kuzzle-device-manager/compare/v2.5.0-dev.3...v2.5.0-dev.4) (2024-12-05)
+
+
+### Features
+
+* add editor hint support ([#386](https://github.com/kuzzleio/kuzzle-device-manager/issues/386)) ([a9b62df](https://github.com/kuzzleio/kuzzle-device-manager/commit/a9b62df423f1218c7bd7866e33b33626f4f17e06))
+
+# [2.5.0-dev.3](https://github.com/kuzzleio/kuzzle-device-manager/compare/v2.5.0-dev.2...v2.5.0-dev.3) (2024-12-05)
+
+
+### Features
+
+* **softTenants:** add softTenant ids to assets measures documents ([#383](https://github.com/kuzzleio/kuzzle-device-manager/issues/383)) ([1b36fe0](https://github.com/kuzzleio/kuzzle-device-manager/commit/1b36fe019ce11a0fb7faf4ce5f3c6c2cff4223e9))
+
 # [2.5.0-beta.2](https://github.com/kuzzleio/kuzzle-device-manager/compare/v2.5.0-beta.1...v2.5.0-beta.2) (2024-11-18)
 
 

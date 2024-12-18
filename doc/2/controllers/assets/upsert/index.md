@@ -15,8 +15,8 @@ The Upsert operation allows you to create a new asset or update an existing one 
 ### HTTP
 
 ```http
-URL: http://kuzzle:7512/_/device-manager/:engineId/assets/:_id
-Method: POST
+URL: http://kuzzle:7512/_/device-manager/:engineId/assets
+Method: PUT
 ```
 
 ## Other protocols

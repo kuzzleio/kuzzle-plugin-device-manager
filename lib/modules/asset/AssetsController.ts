@@ -62,9 +62,7 @@ export class AssetsController {
         },
         upsert: {
           handler: this.upsert.bind(this),
-          http: [
-            { path: "device-manager/:engineId/assets/:_id", verb: "post" },
-          ],
+          http: [{ path: "device-manager/:engineId/assets", verb: "put" }],
         },
         delete: {
           handler: this.delete.bind(this),

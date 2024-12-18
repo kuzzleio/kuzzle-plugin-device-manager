@@ -25,7 +25,10 @@ export const assetsMappings: CollectionMappings = {
         date: { type: "date" },
       },
     },
-
+    softTenant: {
+      type: "keyword",
+      fields: { text: { type: "text" } },
+    },
     metadata: {
       properties: {
         // populated with asset models

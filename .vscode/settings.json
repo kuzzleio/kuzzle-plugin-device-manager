@@ -1,0 +1,8 @@
+{
+  "javascript.preferences.quoteStyle": "double",
+  "exportall.config.quote": "\"",
+  "exportall.config.relExclusion": [
+    "/lib/modules/shared/exports.ts",
+    "/lib/modules/shared/types/exports.ts"
+  ]
+}
