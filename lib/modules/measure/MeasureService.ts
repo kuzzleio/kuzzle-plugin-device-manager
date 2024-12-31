@@ -513,7 +513,7 @@ export class MeasureService extends BaseService {
       device._source.measures = {};
     }
 
-    let lastMeasuredAt = 0;
+    let lastMeasuredAt = device._source.lastMeasuredAt ?? 0;
 
     for (const measurement of measurements) {
       if (measurement.origin.type !== "device") {
@@ -564,7 +564,7 @@ export class MeasureService extends BaseService {
       asset._source.measures = {};
     }
 
-    let lastMeasuredAt = 0;
+    let lastMeasuredAt = asset._source.lastMeasuredAt ?? 0;
 
     for (const measurement of measurements) {
       if (measurement.origin.type === "computed") {

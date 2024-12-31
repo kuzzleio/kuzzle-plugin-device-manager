@@ -78,4 +78,69 @@ describe("Ingestion Pipeline: process before", () => {
 
     expect(asset._source.lastMeasuredAt).toBe(1680096420000);
   });
+
+  it("should not update lastMeasuredAt if measures are older than current lastMeasure", async () => {
+    const now = Date.now();
+    await sendDummyTempPositionPayloads(sdk, [
+      {
+        deviceEUI: "linked2",
+        temperature: {
+          value: 21,
+          measuredAt: now,
+        },
+        location: {
+          value: {
+            lat: 21,
+            lon: 21,
+          },
+          measuredAt: now,
+        },
+      },
+    ]);
+
+    let device = await sdk.document.get<DeviceContent>(
+      "engine-ayse",
+      "devices",
+      "DummyTempPosition-linked2",
+    );
+    expect(device._source.lastMeasuredAt).toBeGreaterThanOrEqual(now);
+    let asset = await sdk.document.get<ContainerAssetContent>(
+      "engine-ayse",
+      "assets",
+      "Container-linked2",
+    );
+    expect(asset._source.lastMeasuredAt).toBeGreaterThanOrEqual(now);
+
+    await sendDummyTempPositionPayloads(sdk, [
+      {
+        deviceEUI: "linked2",
+        temperature: {
+          value: 21,
+          measuredAt: now - 100000,
+        },
+        location: {
+          value: {
+            lat: 21,
+            lon: 21,
+          },
+          measuredAt: now - 100000,
+        },
+      },
+    ]);
+    device = await sdk.document.get<DeviceContent>(
+      "engine-ayse",
+      "devices",
+      "DummyTempPosition-linked2",
+    );
+
+    expect(device._source.lastMeasuredAt).toBeGreaterThanOrEqual(now);
+
+    asset = await sdk.document.get<ContainerAssetContent>(
+      "engine-ayse",
+      "assets",
+      "Container-linked2",
+    );
+
+    expect(asset._source.lastMeasuredAt).toBeGreaterThanOrEqual(now);
+  });
 });
