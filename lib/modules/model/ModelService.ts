@@ -24,6 +24,7 @@ import { ModelSerializer } from "./ModelSerializer";
 import {
   AssetModelContent,
   DeviceModelContent,
+  LocaleDetails,
   MeasureModelContent,
   MetadataDetails,
   MetadataGroups,
@@ -193,6 +194,7 @@ export class ModelService extends BaseService {
     metadataGroups: MetadataGroups,
     measures: NamedMeasures,
     tooltipModels: TooltipModels,
+    locales: { [valueName: string]: LocaleDetails },
   ): Promise<KDocument<AssetModelContent>> {
     if (Inflector.pascalCase(model) !== model) {
       throw new BadRequestError(`Asset model "${model}" must be PascalCase.`);
@@ -209,6 +211,7 @@ export class ModelService extends BaseService {
     const modelContent: AssetModelContent = {
       asset: {
         defaultMetadata,
+        locales,
         measures,
         metadataDetails,
         metadataGroups,
@@ -369,9 +372,13 @@ export class ModelService extends BaseService {
     valuesMappings: JSONObject,
     validationSchema?: SchemaObject,
     valuesDetails?: MeasureValuesDetails,
+    locales?: {
+      [valueName: string]: LocaleDetails;
+    },
   ): Promise<KDocument<MeasureModelContent>> {
     const modelContent: MeasureModelContent = {
       measure: {
+        locales,
         type,
         valuesDetails,
         valuesMappings,
@@ -689,6 +696,7 @@ export class ModelService extends BaseService {
     metadataGroups: MetadataGroups,
     measures: AssetModelContent["asset"]["measures"],
     tooltipModels: TooltipModels,
+    locales: { [valueName: string]: LocaleDetails },
     request: KuzzleRequest,
   ): Promise<KDocument<AssetModelContent>> {
     if (Inflector.pascalCase(model) !== model) {
@@ -714,6 +722,7 @@ export class ModelService extends BaseService {
     const assetModelContent: AssetModelContent = {
       asset: {
         defaultMetadata,
+        locales,
         measures: measuresUpdated,
         metadataDetails,
         metadataGroups,
