@@ -142,6 +142,7 @@ export class ModelsController {
     const metadataDetails = request.getBodyObject("metadataDetails", {});
     const metadataGroups = request.getBodyObject("metadataGroups", {});
     const tooltipModels = request.getBodyObject("tooltipModels", {});
+    const locales = request.getBodyObject("locales", {});
 
     const assetModel = await this.modelService.writeAsset(
       engineGroup,
@@ -152,6 +153,7 @@ export class ModelsController {
       metadataGroups,
       measures,
       tooltipModels,
+      locales,
     );
 
     return assetModel;
@@ -284,6 +286,7 @@ export class ModelsController {
     const metadataDetails = request.getBodyObject("metadataDetails", {});
     const metadataGroups = request.getBodyObject("metadataGroups", {});
     const tooltipModels = request.getBodyObject("tooltipModels", {});
+    const locales = request.getBodyObject("locales", {});
 
     const updatedAssetModel = await this.modelService.updateAsset(
       engineGroup,
@@ -294,6 +297,7 @@ export class ModelsController {
       metadataGroups,
       measures,
       tooltipModels,
+      locales,
       request,
     );
 
