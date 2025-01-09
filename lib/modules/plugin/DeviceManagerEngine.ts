@@ -327,7 +327,6 @@ export class DeviceManagerEngine extends AbstractEngine<DeviceManagerPlugin> {
       InternalCollection.DEVICES,
       InternalCollection.MEASURES,
     ];
-
     await Promise.all(
       collections.map(async (collection) => {
         if (await this.sdk.collection.exists(index, collection)) {
@@ -335,7 +334,7 @@ export class DeviceManagerEngine extends AbstractEngine<DeviceManagerPlugin> {
         }
       }),
     );
-
+    await this.detachDevicesFromAdminIndex(index);
     return {
       collections,
     };
@@ -653,5 +652,41 @@ export class DeviceManagerEngine extends AbstractEngine<DeviceManagerPlugin> {
     );
 
     return result.hits.map((elt) => elt._source);
+  }
+
+  /**
+   * Detach all devices of an index in the admin index
+   *
+   * @param engineId The target engine Id
+   * @returns {any}
+   */
+  private async detachDevicesFromAdminIndex(engineId: string) {
+    const devices = [];
+
+    let result = await this.sdk.document.search(
+      this.adminIndex,
+      "devices",
+      {
+        _source: false,
+        query: { bool: { must: { term: { engineId } } } },
+      },
+      {
+        scroll: "2s",
+        size: 100,
+      },
+    );
+    while (result !== null) {
+      devices.push(...result.hits);
+      result = await result.next();
+    }
+    if (devices.length > 0) {
+      void this.sdk.document.mUpdate(
+        this.adminIndex,
+        "devices",
+        devices.map((device) => {
+          return { _id: device._id, body: { assetId: null, engineId: null } };
+        }),
+      );
+    }
   }
 }

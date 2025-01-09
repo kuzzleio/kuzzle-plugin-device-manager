@@ -144,26 +144,13 @@ export class AssetService extends DigitalTwinService {
     request: KuzzleRequest,
   ): Promise<KDocument<AssetContent>> {
     const asset = await this.get(engineId, assetId, request);
-    const unknownMetadata = {};
+
     for (const key in metadata) {
       if (key in asset._source.metadata) {
         asset._source.metadata[key] = metadata[key];
-      } else {
-        unknownMetadata[key] = metadata[key];
       }
     }
-    // ? If metadata key is unknown on the asset we check that it exists in the assetModel mappings
-    if (Object.keys(unknownMetadata).length > 0) {
-      const assetModel = await ask<AskModelAssetGet>(
-        "ask:device-manager:model:asset:get",
-        { engineGroup: engineId.split("-")[1], model: asset._source.model },
-      );
-      for (const key in unknownMetadata) {
-        if (key in assetModel.asset.metadataMappings) {
-          asset._source.metadata[key] = unknownMetadata[key];
-        }
-      }
-    }
+
     const updatedPayload = await this.app.trigger<EventAssetUpdateBefore>(
       "device-manager:asset:update:before",
       { asset, metadata },
