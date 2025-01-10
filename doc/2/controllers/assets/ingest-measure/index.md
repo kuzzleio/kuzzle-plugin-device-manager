@@ -7,6 +7,7 @@ description: Kuzzle IoT Platform - Device Manager - Assets Controller
 
 # ingestMeasure
 
+<SinceBadge version="2.5.0" />
 Ingest a single measure into an asset.
 
 ---
